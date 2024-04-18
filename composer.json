@@ -1,0 +1,64 @@
+{
+  "name": "ophpl/omnipay-montonio",
+  "type": "library",
+  "description": "Montonio gateway for Omnipay payment processing library",
+  "keywords": [
+    "montonio",
+    "gateway",
+    "merchant",
+    "omnipay",
+    "pay",
+    "payment",
+    "purchase"
+  ],
+  "homepage": "https://github.com/ophpl/omnipay-montonio",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Stanislav Prokopov",
+      "email": "stanislav.prokopov@gmail.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "8.0.2"
+    },
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Montonio\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Omnipay\\Montonio\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "montonio/montonio-shopware-php-sdk": "^1.4",
+    "omnipay/common": "^3.2",
+    "symfony/http-client": "^6.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^v3.0",
+    "http-interop/http-factory-guzzle": "^1.2",
+    "omnipay/tests": "^4",
+    "phpunit/phpunit": "^8.5|^9"
+  },
+  "scripts": {
+    "test": [
+      "@php -d date.timezone=UTC vendor/bin/phpunit -c phpunit.xml.dist"
+    ],
+    "lint": [
+      "vendor/bin/php-cs-fixer fix src --ansi --no-interaction --dry-run --diff --verbose"
+    ],
+    "fix": [
+      "vendor/bin/php-cs-fixer fix src"
+    ]
+  }
+}
