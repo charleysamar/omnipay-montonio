@@ -58,7 +58,7 @@ class PurchaseRequest extends AbstractRequest
 
         $payment->setPayment(
             (new Payment())
-                ->setMethod(Payment::PAYMENT_METHOD_PAYMENT_INITIATION)
+                ->setMethod($this->getPaymentMethod())
                 ->setCurrency($this->getCurrency())
                 ->setAmount($this->getAmountInteger())
                 ->setMethodOptions(

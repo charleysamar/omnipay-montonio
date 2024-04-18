@@ -4,6 +4,7 @@ namespace Omnipay\Montonio;
 
 use Montonio\Clients\AbstractClient;
 use Montonio\Clients\PaymentsClient;
+use Montonio\Structs\Payment;
 
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Exception\InvalidRequestException;
@@ -33,6 +34,7 @@ class Gateway extends AbstractGateway
         return array(
             'accessKey' => '',
             'secretKey' => '',
+            'paymentMethod' => Payment::PAYMENT_METHOD_PAYMENT_INITIATION,
             'preferredCountry' => '',
             'preferredProvider' => '',
             'testMode' => false
@@ -81,6 +83,28 @@ class Gateway extends AbstractGateway
     public function setSecretKey($value)
     {
         return $this->setParameter('secretKey', $value);
+    }
+
+    /**
+     * Get payment method.
+     *
+     * @return string payment method
+     */
+    public function getPaymentMethod()
+    {
+        return $this->getParameter('paymentMethod');
+    }
+
+    /**
+     * Set payment method.
+     *
+     * @param string $value payment method
+     *
+     * @return $this
+     */
+    public function setPaymentMethod($value)
+    {
+        return $this->setParameter('paymentMethod', $value);
     }
 
     /**

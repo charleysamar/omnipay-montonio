@@ -48,7 +48,27 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('secretKey', $value);
     }
 
+    /**
+     * Get payment method.
+     *
+     * @return string payment method
+     */
+    public function getPaymentMethod()
+    {
+        return $this->getParameter('paymentMethod');
+    }
 
+    /**
+     * Set payment method.
+     *
+     * @param string $value payment method
+     *
+     * @return $this
+     */
+    public function setPaymentMethod($value)
+    {
+        return $this->setParameter('paymentMethod', $value);
+    }
 
     /**
      * Get preferred country.
