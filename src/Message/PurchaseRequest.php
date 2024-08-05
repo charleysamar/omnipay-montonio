@@ -37,7 +37,7 @@ class PurchaseRequest extends AbstractRequest
             ->setReturnUrl($this->getReturnUrl())
             ->setNotificationUrl($this->getNotifyUrl())
             ->setCurrency($this->getCurrency())
-            ->setGrandTotal($this->getAmountInteger())
+            ->setGrandTotal($this->getAmount())
             ->setLocale(Utils::getNormalizedLocale($this->getLanguage()));
 
         $items = $this->getItems();
@@ -62,7 +62,7 @@ class PurchaseRequest extends AbstractRequest
             (new Payment())
                 ->setMethod($this->getPaymentMethod())
                 ->setCurrency($this->getCurrency())
-                ->setAmount($this->getAmountInteger())
+                ->setAmount($this->getAmount())
                 ->setMethodOptions(
                     (new PaymentMethodOptions())
                         ->setPaymentDescription($this->getDescription())

@@ -43,10 +43,10 @@ class PurchaseRequestTest extends TestCase
         $this->assertSame('access-key', $data->getAccessKey());
         $this->assertSame('return-url', $data->getReturnUrl());
         $this->assertSame('notify-url', $data->getNotificationUrl());
-        $this->assertSame(10000.0, $data->getGrandTotal());
+        $this->assertSame(100.0, $data->getGrandTotal());
         $this->assertSame('EUR', $data->getCurrency());
         $this->assertSame(Payment::PAYMENT_METHOD_PAYMENT_INITIATION, $data->getPayment()->getMethod());
-        $this->assertSame(10000.0, $data->getPayment()->getAmount());
+        $this->assertSame(100.0, $data->getPayment()->getAmount());
         $this->assertSame('EUR', $data->getPayment()->getCurrency());
         $this->assertSame('description', $data->getPayment()->getMethodOptions()->getPaymentDescription());
     }
