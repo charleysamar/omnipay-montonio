@@ -48,7 +48,8 @@
     "friendsofphp/php-cs-fixer": "^v3.0",
     "http-interop/http-factory-guzzle": "^1.2",
     "omnipay/tests": "^4",
-    "phpunit/phpunit": "^8.5|^9"
+    "phpunit/phpunit": "^8.5|^9",
+    "phan/phan": "^5.4"
   },
   "scripts": {
     "test": [
@@ -59,6 +60,9 @@
     ],
     "fix": [
       "vendor/bin/php-cs-fixer fix src"
+    ],
+    "phan": [
+      "vendor/bin/phan --no-progress-bar --allow-polyfill-parser --config-file .phan.php"
     ]
   }
 }

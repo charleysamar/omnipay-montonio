@@ -9,7 +9,7 @@ use Montonio\Structs\Payment;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\AbstractRequest;
-use Omnipay\Montonio\Message\PurchaseRequest;
+use Omnipay\Common\Message\RequestInterface;
 
 /**
  * Class Gateway
@@ -170,10 +170,20 @@ class Gateway extends AbstractGateway
     /**
      * @param array $options
      *
-     * @return AbstractRequest|PurchaseRequest
+     * @return AbstractRequest|RequestInterface
      */
     public function purchase(array $options = array())
     {
         return $this->createRequest('\Omnipay\Montonio\Message\PurchaseRequest', $options);
     }
+
+    /**
+     * @param array $options
+     * @return AbstractRequest|RequestInterface
+     */
+    public function completePurchase(array $options = [])
+    {
+        return $this->createRequest('\Omnipay\Montonio\Message\CompletePurchaseRequest', $options);
+    }
+
 }

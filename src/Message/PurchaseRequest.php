@@ -4,6 +4,7 @@ namespace Omnipay\Montonio\Message;
 
 use Montonio\Clients\AbstractClient;
 use Montonio\Clients\PaymentsClient;
+use Montonio\Exception\RequestException;
 use Montonio\Structs\Address;
 use Montonio\Structs\LineItem;
 use Montonio\Structs\Payment;
@@ -21,6 +22,7 @@ class PurchaseRequest extends AbstractRequest
     public function getData()
     {
         $this->validate(
+            'transactionId',
             'amount',
             'currency',
             'description',
@@ -77,28 +79,39 @@ class PurchaseRequest extends AbstractRequest
             return $payment;
         }
 
-        $payment->setBillingAddress(
-            (new Address())
-                    ->setFirstName($card->getFirstName())
-                    ->setLastName($card->getLastName())
-                    ->setEmail($card->getEmail())
-                    ->setAddressLine1($card->getBillingAddress1())
-                    ->setLocality($card->getBillingCity())
-                    ->setRegion($card->getBillingState())
-                    ->setCountry($card->getBillingCountry())
-                    ->setPostalCode($card->getBillingPostcode())
-        )
-            ->setShippingAddress(
-                (new Address())
-                    ->setFirstName($card->getFirstName())
-                    ->setLastName($card->getLastName())
-                    ->setEmail($card->getEmail())
-                    ->setAddressLine1($card->getShippingAddress1())
-                    ->setLocality($card->getShippingCity())
-                    ->setRegion($card->getShippingState())
-                    ->setCountry($card->getShippingCountry())
-                    ->setPostalCode($card->getShippingPostcode())
-            );
+        if (!empty($card->getBillingAddress1())) {
+            $billingAddress = (new Address())
+                ->setFirstName($card->getFirstName())
+                ->setLastName($card->getLastName())
+                ->setEmail($card->getEmail())
+                ->setAddressLine1($card->getBillingAddress1())
+                ->setLocality($card->getBillingCity())
+                ->setCountry($card->getBillingCountry())
+                ->setPostalCode($card->getBillingPostcode());
+
+            if (!empty($card->getBillingState())) {
+                $billingAddress->setRegion($card->getBillingState());
+            }
+
+            $payment->setBillingAddress($billingAddress);
+        }
+
+        if (!empty($card->getShippingAddress1())) {
+            $shippingAddress = (new Address())
+                ->setFirstName($card->getFirstName())
+                ->setLastName($card->getLastName())
+                ->setEmail($card->getEmail())
+                ->setAddressLine1($card->getShippingAddress1())
+                ->setLocality($card->getShippingCity())
+                ->setCountry($card->getShippingCountry())
+                ->setPostalCode($card->getShippingPostcode());
+
+            if (!empty($card->getShippingState())) {
+                $shippingAddress->setRegion($card->getShippingState());
+            }
+
+            $payment->setShippingAddress($shippingAddress);
+        }
 
         return $payment;
     }
@@ -117,6 +130,8 @@ class PurchaseRequest extends AbstractRequest
             }
 
             return $this->response = new PurchaseResponse($this, $response);
+        } catch (RequestException $e) {
+            throw new InvalidRequestException('Request failed: ' . $e->getResponse(), $e->getCode(), $e);
         } catch (\Throwable $e) {
             throw new InvalidRequestException('Failed to request purchase: ' . $e->getMessage(), 0, $e);
         }
