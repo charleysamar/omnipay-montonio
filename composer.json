@@ -39,8 +39,14 @@
       "Omnipay\\Montonio\\Tests\\": "tests/"
     }
   },
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/charleysamar/montonio-shopware-php-sdk"
+      }
+  ],
   "require": {
-    "montonio/montonio-shopware-php-sdk": "^1.4",
+    "montonio/montonio-shopware-php-sdk": "dev-main as 1.4.3",
     "omnipay/common": "^3.2",
     "symfony/http-client": "^6.0"
   },
@@ -51,6 +57,8 @@
     "phpunit/phpunit": "^8.5|^9",
     "phan/phan": "^5.4"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
     "test": [
       "@php -d date.timezone=UTC vendor/bin/phpunit -c phpunit.xml.dist"

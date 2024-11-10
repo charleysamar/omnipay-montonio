@@ -170,4 +170,26 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('language', $value);
     }
+
+    /**
+     * Get period.
+     *
+     * @return int period
+     */
+    public function getPeriod()
+    {
+        return $this->getParameter('period') ?? 0;
+    }
+
+    /**
+     * Set period.
+     *
+     * @param int $value period
+     *
+     * @return $this
+     */
+    public function setPeriod($value)
+    {
+        return $this->setParameter('period', $value);
+    }
 }

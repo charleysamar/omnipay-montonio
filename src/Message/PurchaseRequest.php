@@ -70,6 +70,7 @@ class PurchaseRequest extends AbstractRequest
                         ->setPreferredCountry($this->getPreferredCountry())
                         ->setPreferredProvider($this->getPreferredProvider())
                         ->setPreferredLocale(Utils::getNormalizedLocale($this->getLanguage()))
+                        ->setPeriod($this->getPeriod())
                 )
         );
 
