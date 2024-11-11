@@ -79,22 +79,6 @@ class PurchaseRequest extends AbstractRequest
                 ->setMethodOptions( $paymentMethodOptions )
         );
 
-        $payment->setPayment(
-            (new Payment())
-                ->setMethod($this->getPaymentMethod())
-                ->setCurrency($this->getCurrency())
-                ->setAmount($this->getAmount())
-                ->setMethodOptions(
-                    (new PaymentMethodOptions())
-                        ->setPaymentDescription($this->getDescription())
-                        ->setPaymentReference($this->getTransactionId())
-                        ->setPreferredCountry($this->getPreferredCountry())
-                        ->setPreferredProvider($this->getPreferredProvider())
-                        ->setPreferredLocale(Utils::getNormalizedLocale($this->getLanguage()))
-                        ->setPeriod($this->getPeriod())
-                )
-        );
-
         $card = $this->getCard();
 
         if (empty($card)) {
