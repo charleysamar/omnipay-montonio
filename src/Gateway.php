@@ -186,4 +186,26 @@ class Gateway extends AbstractGateway
         return $this->createRequest('\Omnipay\Montonio\Message\CompletePurchaseRequest', $options);
     }
 
+    /**
+     * Get period.
+     *
+     * @return int period
+     */
+    public function getPeriod()
+    {
+        return $this->getParameter('period') ?? 0;
+    }
+
+    /**
+     * Set period.
+     *
+     * @param int $value period
+     *
+     * @return $this
+     */
+    public function setPeriod($value)
+    {
+        return $this->setParameter('period', $value);
+    }
+
 }
