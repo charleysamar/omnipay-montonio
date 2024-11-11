@@ -58,6 +58,27 @@ class PurchaseRequest extends AbstractRequest
             ));
         }
 
+        $paymentMethodOptions =  (new PaymentMethodOptions());
+
+        if( $this->getPaymentMethod() === Payment::PAYMENT_METHOD_PAYMENT_INITIATION ) {
+            $paymentMethodOptions->setPaymentDescription($this->getDescription())
+                ->setPaymentReference($this->getTransactionId())
+                ->setPreferredCountry($this->getPreferredCountry())
+                ->setPreferredProvider($this->getPreferredProvider())
+                ->setPreferredLocale(Utils::getNormalizedLocale($this->getLanguage()));
+        } else if( $this->getPaymentMethod() === Payment::PAYMENT_METHOD_PAY_LATER ) {
+            $paymentMethodOptions->setPaymentReference($this->getTransactionId())
+                ->setPeriod($this->getPeriod());
+        }
+
+        $payment->setPayment(
+            (new Payment())
+                ->setMethod($this->getPaymentMethod())
+                ->setCurrency($this->getCurrency())
+                ->setAmount($this->getAmount())
+                ->setMethodOptions( $paymentMethodOptions )
+        );
+
         $payment->setPayment(
             (new Payment())
                 ->setMethod($this->getPaymentMethod())
