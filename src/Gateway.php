@@ -187,6 +187,15 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * @param array $options
+     * @return \Omnipay\Common\Message\AbstractRequest|FetchTransactionRequest
+     */
+    public function fetchTransaction(array $options = [])
+    {
+        return $this->createRequest('\Omnipay\Montonio\Message\FetchTransactionRequest', $options);
+    }
+
+    /**
      * Get period.
      *
      * @return int period
