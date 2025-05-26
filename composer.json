@@ -46,7 +46,7 @@
       }
   ],
   "require": {
-    "montonio/montonio-shopware-php-sdk": "dev-main as 1.4.3",
+    "montonio/montonio-shopware-php-sdk": "dev-main as 1.4.4",
     "omnipay/common": "^3.2",
     "symfony/http-client": "^6.0"
   },
