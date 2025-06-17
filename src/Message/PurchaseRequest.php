@@ -92,7 +92,7 @@ class PurchaseRequest extends AbstractRequest
                 ->setLocality($card->getBillingCity())
                 ->setCountry($card->getBillingCountry())
                 ->setPostalCode($card->getBillingPostcode())
-                ->setPhoneNumber($card->getPhoneNumber());
+                ->setPhoneNumber($card->getPhone());
 
             if (!empty($card->getBillingState())) {
                 $billingAddress->setRegion($card->getBillingState());
@@ -110,7 +110,7 @@ class PurchaseRequest extends AbstractRequest
                 ->setLocality($card->getShippingCity())
                 ->setCountry($card->getShippingCountry())
                 ->setPostalCode($card->getShippingPostcode())
-                ->setPhoneNumber($card->getPhoneNumber());
+                ->setPhoneNumber($card->getPhone());
 
             if (!empty($card->getShippingState())) {
                 $shippingAddress->setRegion($card->getShippingState());
